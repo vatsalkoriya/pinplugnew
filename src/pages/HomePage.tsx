@@ -21,31 +21,44 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="border-b border-border overflow-hidden relative">
-        {/* Subtle grid background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.3)_1px,transparent_1px)] bg-[size:64px_64px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+      <section className="border-b border-border overflow-hidden relative min-h-[85vh] flex items-center justify-center">
+        {/* Radial gradient background */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,hsl(var(--primary)/0.08),transparent)]" />
+        {/* Subtle grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.15)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.15)_1px,transparent_1px)] bg-[size:48px_48px]" />
         
-        <div className="container max-w-6xl mx-auto px-4 py-24 md:py-32 relative">
-          <motion.div className="max-w-2xl">
-            <motion.span
-              initial={{ opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
+        {/* Floating orbs */}
+        <motion.div
+          className="absolute w-96 h-96 rounded-full bg-primary/5 blur-[100px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, x: [0, 20, 0], y: [0, -15, 0] }}
+          transition={{ opacity: { duration: 1 }, x: { duration: 8, repeat: Infinity, ease: "easeInOut" }, y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
+          style={{ top: "20%", left: "10%" }}
+        />
+        <motion.div
+          className="absolute w-72 h-72 rounded-full bg-primary/3 blur-[80px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, x: [0, -15, 0], y: [0, 20, 0] }}
+          transition={{ opacity: { duration: 1, delay: 0.3 }, x: { duration: 7, repeat: Infinity, ease: "easeInOut" }, y: { duration: 9, repeat: Infinity, ease: "easeInOut" } }}
+          style={{ bottom: "15%", right: "15%" }}
+        />
+
+        <div className="container max-w-6xl mx-auto px-4 py-24 md:py-32 relative text-center">
+          <motion.div className="max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-meta text-primary inline-flex items-center gap-2"
+              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-8"
             >
-              <motion.span
-                className="inline-block w-6 h-px bg-primary"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                style={{ transformOrigin: "left" }}
-              />
-              Pinplug Private Limited
-            </motion.span>
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="text-xs font-mono-tech uppercase tracking-widest text-primary">
+                Pinplug Private Limited
+              </span>
+            </motion.div>
             
             <motion.h1
-              className="mt-5 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-foreground leading-[1.05]"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tighter text-foreground leading-[1.05]"
             >
               <motion.span
                 className="block"
@@ -57,7 +70,7 @@ export default function HomePage() {
                 Precision Electronics.
               </motion.span>
               <motion.span
-                className="block bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent"
+                className="block bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent"
                 variants={heroLine}
                 initial="hidden"
                 animate="show"
@@ -71,41 +84,52 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="mt-6 text-[15px] leading-relaxed text-muted-foreground max-w-lg"
+              className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl mx-auto"
             >
               High-performance hardware and expert technical services for the modern home. 
-              From air conditioners to smart home systems — engineered for reliability.
+              Engineered for reliability.
             </motion.p>
             
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.65 }}
-              className="mt-8 flex gap-3"
+              className="mt-10 flex flex-col sm:flex-row gap-3 justify-center"
             >
               <Link
                 to="/products"
-                className="group inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.97] transition-all"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.97] transition-all shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
               >
                 View Products
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 active:scale-[0.97] transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-lg bg-card text-foreground border border-border hover:bg-secondary active:scale-[0.97] transition-all shadow-card"
               >
                 Request Installation
               </Link>
             </motion.div>
-          </motion.div>
 
-          {/* Floating accent element */}
-          <motion.div
-            className="absolute -right-8 top-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-primary/5 blur-3xl hidden lg:block"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.3 }}
-          />
+            {/* Stats bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.85 }}
+              className="mt-16 flex items-center justify-center gap-8 md:gap-12"
+            >
+              {[
+                { value: "500+", label: "Products" },
+                { value: "10k+", label: "Customers" },
+                { value: "24/7", label: "Support" },
+              ].map((stat, i) => (
+                <div key={stat.label} className="text-center">
+                  <p className="text-2xl md:text-3xl font-semibold font-mono-tech text-foreground">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground mt-1 font-mono-tech uppercase tracking-wider">{stat.label}</p>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
