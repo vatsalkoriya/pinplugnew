@@ -10,7 +10,7 @@ import ProductsPage from "@/pages/ProductsPage";
 import ServicesPage from "@/pages/ServicesPage";
 import ContactPage from "@/pages/ContactPage";
 import AdminPage from "@/pages/AdminPage";
-import NotFound from "./pages/NotFound.tsx";
+import AboutPage from "@/pages/AboutPage";
 
 const queryClient = new QueryClient();
 
