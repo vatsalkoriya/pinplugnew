@@ -23,50 +23,60 @@ const services = [
   },
 ];
 
-const item = {
-  hidden: { opacity: 0, y: 8 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" as const } },
-};
-
 export default function ServicesPage() {
   return (
     <div className="min-h-screen">
       <div className="container max-w-6xl mx-auto px-4 py-10">
-        <span className="text-meta">Services</span>
-        <h1 className="mt-3 text-3xl font-semibold tracking-tighter text-foreground">Technical Services</h1>
-        <p className="mt-3 text-[15px] text-muted-foreground max-w-lg leading-relaxed">
-          Professional installation, maintenance, and consultation services backed by years of technical expertise.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <span className="text-meta">Services</span>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tighter text-foreground">Technical Services</h1>
+          <p className="mt-3 text-[15px] text-muted-foreground max-w-lg leading-relaxed">
+            Professional installation, maintenance, and consultation services backed by years of technical expertise.
+          </p>
+        </motion.div>
 
         <div className="mt-10 space-y-6">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              variants={item}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="p-6 md:p-8 rounded-lg bg-card shadow-card outline-subtle"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group p-6 md:p-8 rounded-lg bg-card shadow-card outline-subtle hover:shadow-card-hover transition-all"
             >
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-1">
-                  <service.icon className="w-6 h-6 text-primary mb-3" strokeWidth={1.5} />
+                  <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all">
+                    <service.icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                  </div>
                   <h2 className="text-xl font-medium tracking-tight text-foreground">{service.title}</h2>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{service.description}</p>
                   <Link
                     to="/contact"
-                    className="inline-flex items-center gap-2 mt-5 px-4 py-2 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.97] transition-all"
+                    className="group/btn inline-flex items-center gap-2 mt-5 px-4 py-2 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.97] transition-all"
                   >
-                    Request Service <ArrowRight className="w-3.5 h-3.5" />
+                    Request Service <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
                   </Link>
                 </div>
-                <div className="md:w-64 space-y-2">
+                <div className="md:w-64 space-y-2.5">
                   <span className="text-meta">Includes</span>
-                  {service.features.map(f => (
-                    <div key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  {service.features.map((f, j) => (
+                    <motion.div
+                      key={f}
+                      initial={{ opacity: 0, x: 8 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 + j * 0.05 + 0.2 }}
+                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                    >
                       <CheckCircle2 className="w-3.5 h-3.5 text-primary flex-shrink-0" />
                       {f}
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
