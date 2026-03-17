@@ -13,7 +13,7 @@ export interface Product {
 export interface Category {
   id: string;
   name: string;
-  icon: ComponentType<{ className?: string; strokeWidth?: number }>;
+  icon: LucideIcon;
   description: string;
 }
 
