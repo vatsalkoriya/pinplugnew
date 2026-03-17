@@ -11,6 +11,7 @@ import ServicesPage from "@/pages/ServicesPage";
 import ContactPage from "@/pages/ContactPage";
 import AdminPage from "@/pages/AdminPage";
 import AboutPage from "@/pages/AboutPage";
+import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
 
