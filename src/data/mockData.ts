@@ -1,5 +1,4 @@
-import { Snowflake, Refrigerator, WashingMachine, Tv, Flame, Droplets, Package } from "lucide-react";
-import type { ComponentType } from "react";
+import { Snowflake, Refrigerator, WashingMachine, Tv, Flame, Droplets, Package, type LucideIcon } from "lucide-react";
 
 export interface Product {
   id: string;
