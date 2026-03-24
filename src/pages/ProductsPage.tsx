@@ -8,7 +8,7 @@ import ProductCard from "@/components/ProductCard";
 export default function ProductsPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { products } = useAdmin();
+  const { products, productsLoading } = useAdmin();
   const activeCat = searchParams.get("cat") || "all";
 
   const [search, setSearch] = useState("");
@@ -57,11 +57,10 @@ export default function ProductsPage() {
               <button
                 key={cat.id}
                 onClick={() => navigate(cat.id === "all" ? "/products" : `/products?cat=${cat.id}`)}
-                className={`relative px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
-                  activeCat === cat.id
-                    ? "text-background"
-                    : "bg-secondary text-muted-foreground hover:text-foreground"
-                }`}
+                className={`relative px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${activeCat === cat.id
+                  ? "text-background"
+                  : "bg-secondary text-muted-foreground hover:text-foreground"
+                  }`}
               >
                 {activeCat === cat.id && (
                   <motion.div
@@ -78,18 +77,28 @@ export default function ProductsPage() {
 
         {/* Grid */}
         <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCat + search}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-          >
-            {filtered.map((product, i) => (
-              <ProductCard key={product.id} product={product} onInquire={handleInquire} index={i} />
-            ))}
-          </motion.div>
+          {productsLoading ? (
+            <div className="flex items-center justify-center py-24">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full"
+              />
+            </div>
+          ) : (
+            <motion.div
+              key={activeCat + search}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+            >
+              {filtered.map((product, i) => (
+                <ProductCard key={product._id} product={product} onInquire={handleInquire} index={i} />
+              ))}
+            </motion.div>
+          )}
         </AnimatePresence>
 
         {filtered.length === 0 && (

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Zap, MapPin, Phone, Clock } from "lucide-react";
+import { MapPin, Phone, Clock, Instagram, Youtube, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -8,8 +8,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-md bg-primary flex items-center justify-center">
-                <Zap className="w-3.5 h-3.5 text-primary-foreground" />
+              <div className="w-7 h-7 rounded-md overflow-hidden bg-background/60 border border-white/10 flex items-center justify-center">
+                <img src="/favicon.png" alt="Pinplug logo" className="w-full h-full object-contain" />
               </div>
               <span className="font-semibold tracking-tight text-foreground">Pinplug</span>
             </div>
@@ -38,9 +38,36 @@ export default function Footer() {
             <h4 className="text-meta mb-3">Company</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/about" className="hover:text-foreground transition-colors">About Us</Link></li>
+              <li><Link to="/reviews" className="hover:text-foreground transition-colors">Reviews</Link></li>
               <li><Link to="/contact" className="hover:text-foreground transition-colors">Contact Us</Link></li>
               <li><Link to="/admin" className="hover:text-foreground transition-colors">Admin Portal</Link></li>
             </ul>
+          </div>
+          <div>
+            <h4 className="text-meta mb-3">Socials</h4>
+            <div className="flex items-center gap-3">
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                aria-label="YouTube"
+                className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
+              >
+                <Youtube className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                aria-label="Twitter"
+                className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
+              >
+                <Twitter className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         </div>
 

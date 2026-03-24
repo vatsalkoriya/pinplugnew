@@ -3,11 +3,10 @@ import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Send, MapPin, Phone, Mail } from "lucide-react";
 import { toast } from "sonner";
-import { useAdmin } from "@/context/AdminContext";
+import { contactsApi } from "@/lib/api";
 
 export default function ContactPage() {
   const [searchParams] = useSearchParams();
-  const { contacts } = useAdmin();
   const prefilledProduct = searchParams.get("product") || "";
 
   const [form, setForm] = useState({
@@ -19,19 +18,22 @@ export default function ContactPage() {
   });
   const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       toast.error("Please fill in all required fields.");
       return;
     }
     setSending(true);
-    // Simulate API call — replace with MongoDB integration
-    setTimeout(() => {
-      toast.success("Message sent successfully! We'll get back to you soon.");
+    try {
+      await contactsApi.create(form);
+      toast.success("Message sent! We'll get back to you soon.");
       setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch {
+      toast.error("Failed to send message. Please try again.");
+    } finally {
       setSending(false);
-    }, 800);
+    }
   };
 
   return (
