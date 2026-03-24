@@ -17,7 +17,7 @@ fs.writeFileSync('src/pages/ProductDetailsPage.tsx', pLines.join('\n'));
 // Fix App.tsx
 let aCode = fs.readFileSync('src/App.tsx', 'utf8');
 aCode = aCode.replace('import ProductDetailsPage from "@/pages/ProductDetailsPage";\\nimport ProductDetailsPage from "@/pages/ProductDetailsPage";', 'import ProductDetailsPage from "@/pages/ProductDetailsPage";');
-aCode = aCode.replace(/<Route path="\\/products" element={<ProductsPage \\/>} \\/>/g, '<Route path="/products" element={<ProductsPage />} />\\n              <Route path="/product/:id" element={<ProductDetailsPage />} />');
+aCode = aCode.replace(/<Route path="\/products" element={<ProductsPage \/>} \/>/g, '<Route path="/products" element={<ProductsPage />} />\n              <Route path="/product/:id" element={<ProductDetailsPage />} />');
 fs.writeFileSync('src/App.tsx', aCode);
 
 console.log("Fixed files!");

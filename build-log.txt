@@ -1,0 +1,31 @@
+﻿
+> vite_react_shadcn_ts@0.0.0 build
+> vite build
+
+[36mvite v8.0.0 [32mbuilding client environment for production...[36m[39m
+[2K
+transforming...Γ£ô 2077 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              1.18 kB Γöé gzip:   0.53 kB
+dist/assets/team-work-DSVsfGBR.jpg          60.71 kB
+dist/assets/founder-portrait-HqAokMVv.jpg   85.68 kB
+dist/assets/store-interior-O3hmaVjO.jpg    138.40 kB
+dist/assets/index-C9uVvaQs.css              75.08 kB Γöé gzip:  12.86 kB
+dist/assets/index-97tDcKpK.js              986.17 kB Γöé gzip: 313.38 kB
+
+[32mΓ£ô built in 1.21s[39m
+node.exe : [33m[plugin builtin:vite-reporter] 
+At line:1 char:1
++ & "C:\nvm4w\nodejs/node.exe" "C:\nvm4w\nodejs/node_modules/npm/bin/np ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([33m[plugin builtin:vite-reporte 
+   r] :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: 
+https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via 
+build.chunkSizeWarningLimit.[39m

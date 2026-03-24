@@ -80,9 +80,10 @@ export default function ProductDetailsPage() {
       setInquirySuccess(true);
       toast.success("Inquiry sent successfully!");
       // Reset form on success or allow them to close it
-    } catch (err: any) {
-      console.error(err);
-      toast.error("Failed to send inquiry: " + (err.message || "Unknown error"));
+    } catch (err) {
+      const error = err as Error;
+      console.error(error);
+      toast.error("Failed to send inquiry: " + (error.message || "Unknown error"));
     } finally {
       setSubmittingInquiry(false);
     }
@@ -143,11 +144,11 @@ export default function ProductDetailsPage() {
                 <button
                   key={idx}
                   onClick={() => setSelectedImage(img)}
-                  className={`w-20 h-20 aspect-square rounded-xl overflow-hidden border-2 transition-all duration-200 \${
+                  className={`w-20 h-20 aspect-square rounded-xl overflow-hidden border-2 transition-all duration-200 ${
                     selectedImage === img ? "border-primary shadow-elevated opacity-100" : "border-transparent opacity-60 hover:opacity-100"
                   }`}
                 >
-                  <img src={img} alt={`${product.name} thumbnail \${idx + 1}`} className="w-full h-full object-cover" />
+                  <img src={img} alt={`${product.name} thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>

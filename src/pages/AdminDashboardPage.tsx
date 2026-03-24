@@ -215,9 +215,9 @@ function Spinner() {
 function OverviewTab({
   products, contacts, setTab,
 }: {
-  products: any[]; contacts: any[]; setTab: (t: Tab) => void;
+  products: Product[]; contacts: any[]; setTab: (t: Tab) => void;
 }) {
-  const newContacts = contacts.filter((c: any) => c.status === "new").length;
+  const newContacts = contacts.filter((c: { status: string }) => c.status === "new").length;
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <h1 className="text-2xl font-semibold tracking-tight text-foreground">Dashboard</h1>
@@ -245,7 +245,7 @@ function OverviewTab({
 function ProductsTab({
   products, loading, deleteProduct, startEdit, addProduct,
 }: {
-  products: any[]; loading: boolean; deleteProduct: (id: string) => void; startEdit: (product: any) => void; addProduct: (p: any) => void;
+  products: Product[]; loading: boolean; deleteProduct: (id: string) => void; startEdit: (product: Product) => void; addProduct: (p: Partial<Product>) => void;
 }) {
   const [importing, setImporting] = useState(false);
   const importFileRef = useRef<HTMLInputElement>(null);
@@ -636,7 +636,7 @@ function ReviewsTab() {
 function AddProductTab({
   addProduct, updateProduct, product, setTab,
 }: {
-  addProduct?: (p: any) => void; updateProduct?: (id: string, p: any) => void; product?: any; setTab: (t: Tab) => void;
+  addProduct?: (p: any) => void; updateProduct?: (id: string, p: any) => void; product?: Product; setTab: (t: Tab) => void;
 }) {
   const isEdit = !!product;
   const [form, setForm] = useState({

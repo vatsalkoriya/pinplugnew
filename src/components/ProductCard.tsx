@@ -43,7 +43,7 @@ export default function ProductCard({ product, onInquire, index = 0 }: ProductCa
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
                   src={images[currentImageIdx]}
-                  alt={`${product.name} \${currentImageIdx + 1}`}
+                  alt={`${product.name} ${currentImageIdx + 1}`}
                   className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500"
                 />
               </AnimatePresence>
@@ -64,7 +64,7 @@ export default function ProductCard({ product, onInquire, index = 0 }: ProductCa
               {images.length > 1 && (
                 <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300">
                   {images.map((_, i) => (
-                     <div key={i} className={`w-1.5 h-1.5 rounded-full transition-colors \${i === currentImageIdx ? "bg-primary" : "bg-primary/30"}`} />
+                     <div key={i} className={`w-1.5 h-1.5 rounded-full transition-colors ${i === currentImageIdx ? "bg-primary" : "bg-primary/30"}`} />
                   ))}
                 </div>
               )}
