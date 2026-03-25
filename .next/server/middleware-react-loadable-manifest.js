@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST="{\"components\\\\ChatbotLazy.tsx -> ./Chatbot\":{\"id\":\"components\\\\ChatbotLazy.tsx -> ./Chatbot\",\"files\":[\"static/chunks/_app-pages-browser_src_components_Chatbot_tsx.js\"]}}"

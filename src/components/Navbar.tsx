@@ -1,4 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,7 +17,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const location = useLocation();
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -26,7 +29,7 @@ export default function Navbar() {
     >
       <div className="container max-w-6xl mx-auto flex items-center justify-between h-14 md:h-16 px-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group shrink-0">
+        <Link href="/" prefetch className="flex items-center gap-3 group shrink-0">
           <motion.div
             whileHover={{ rotate: 10, scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -41,13 +44,14 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center justify-center flex-1 ml-8">
           <ul className="flex items-center gap-8">
             {navLinks.map(link => {
-              const isActive = location.pathname === link.to;
+              const isActive = pathname === link.to;
 
               if (link.to === "/products") {
                 return (
                   <li key={link.to} className="group relative">
                     <Link
-                      to={link.to}
+                      href={link.to}
+                      prefetch
                       className={`flex items-center gap-1 py-5 text-sm font-bold uppercase tracking-wider transition-colors hover:text-foreground ${
                         isActive ? "text-foreground border-b-2 border-foreground" : "text-muted-foreground"
                       }`}
@@ -64,7 +68,8 @@ export default function Navbar() {
                             return (
                               <Link 
                                 key={cat.id} 
-                                to={cat.id === "all" ? "/products" : `/products?cat=${cat.id}`} 
+                                href={cat.id === "all" ? "/products" : `/products?cat=${cat.id}`} 
+                                prefetch
                                 className="flex items-center gap-4 p-3 rounded-lg hover:bg-accent transition-colors group/item"
                               >
                                 <div className="p-2 bg-muted rounded-md group-hover/item:bg-background transition-colors">
@@ -86,7 +91,8 @@ export default function Navbar() {
               return (
                 <li key={link.to}>
                   <Link
-                    to={link.to}
+                    href={link.to}
+                    prefetch
                     className={`py-5 text-sm font-bold uppercase tracking-wider transition-colors hover:text-foreground ${
                       isActive ? "text-foreground border-b-2 border-foreground" : "text-muted-foreground"
                     }`}
@@ -102,7 +108,8 @@ export default function Navbar() {
         {/* Right Nav Options */}
         <div className="hidden md:flex items-center justify-end gap-4 shrink-0">
           <Link
-            to="/admin"
+            href="/admin"
+            prefetch
             className="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-full bg-foreground text-background hover:bg-neutral-800 transition-colors"
           >
             Admin
@@ -148,7 +155,8 @@ export default function Navbar() {
                   transition={{ delay: i * 0.05 }}
                 >
                   <Link
-                    to={link.to}
+                    href={link.to}
+                    prefetch
                     onClick={() => setMobileOpen(false)}
                     className="text-2xl font-black uppercase tracking-tighter text-foreground"
                   >
@@ -163,7 +171,8 @@ export default function Navbar() {
                 className="mt-4 pt-6 border-t border-border"
               >
                 <Link
-                  to="/admin"
+                  href="/admin"
+                  prefetch
                   onClick={() => setMobileOpen(false)}
                   className="inline-flex px-6 py-3 text-sm font-bold uppercase tracking-wider rounded-full bg-foreground text-background"
                 >

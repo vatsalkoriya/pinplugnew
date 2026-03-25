@@ -1,3 +1,5 @@
+"use client";
+
 import {
   createContext,
   useContext,
@@ -35,9 +37,7 @@ const AdminContext = createContext<AdminContextType | null>(null);
 // ─── Provider ───────────────────────────────────────────────────────────────
 
 export function AdminProvider({ children }: { children: ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem("pinplug_admin_auth") === "true";
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const [products, setProducts] = useState<Product[]>([]);
   const [productsLoading, setProductsLoading] = useState(false);
@@ -47,6 +47,11 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   // ── Fetch data ─────────────────────────────────────────
 
   // Public products for everyone
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setIsAuthenticated(localStorage.getItem("pinplug_admin_auth") === "true");
+  }, []);
+
   useEffect(() => {
     setProductsLoading(true);
     productsApi
@@ -72,8 +77,8 @@ export function AdminProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback(async (email: string, password: string) => {
     // Admin credentials — stored in .env on the server in production
-    const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL ?? "admin@pinplug.com";
-    const ADMIN_PASS = import.meta.env.VITE_ADMIN_PASSWORD ?? "admin123";
+    const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL ?? "admin@pinplug.com";
+    const ADMIN_PASS = process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? "admin123";
 
     if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
       setIsAuthenticated(true);

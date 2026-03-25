@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Product } from "@/context/AdminContext";
 import { Package, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
@@ -80,7 +82,7 @@ export default function ProductCard({ product, onInquire, index = 0 }: ProductCa
         <span className="text-[10px] font-mono-tech uppercase tracking-widest text-primary">
           {product.category.replace("-", " ")}
         </span>
-        <Link to={`/product/${product._id}`}>
+        <Link href={`/product/${product._id}`} prefetch>
           <h3 className="text-base font-medium text-foreground leading-tight group-hover:text-primary transition-colors duration-300">
             {product.name}
           </h3>

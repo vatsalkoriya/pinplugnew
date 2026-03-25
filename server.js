@@ -7,8 +7,8 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import multer from "multer";
 
-import Product from "./models/Product.js";
-import Contact from "./models/Contact.js";
+import Product from "./src/models/Product.js";
+import Contact from "./src/models/Contact.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

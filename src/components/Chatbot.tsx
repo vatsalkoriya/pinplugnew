@@ -1,9 +1,11 @@
+"use client";
+
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Loader2 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 interface Message {
   role: 'system' | 'user' | 'assistant';
@@ -42,7 +44,7 @@ export default function Chatbot() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -59,41 +61,23 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      // In a real application, you'd hide this key in your backend or use environment variables
-      // But for this frontend implementation, we'll try to use the VITE_OPENROUTER_API_KEY environment variable.
-      // If it's missing, we'll inform the user.
-      const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
-
-      if (!apiKey) {
-         setMessages(prev => [...prev, { role: 'assistant', content: 'Please configure the VITE_OPENROUTER_API_KEY environment variable to enable AI responses.' }]);
-         setIsLoading(false);
-         return;
-      }
-
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'HTTP-Referer': window.location.origin, 
-          'X-Title': 'Pinplug Chatbot',
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify({
-          model: 'openai/gpt-4o-mini',
           messages: [
             { role: 'system', content: SYSTEM_PROMPT },
             ...messages.map(m => ({ role: m.role, content: m.content })),
             userMessage
-          ]
+          ],
         })
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch from OpenRouter API');
+        throw new Error('Failed to fetch from chat API');
       }
 
       const data = await response.json();
-      const botResponse = data.choices[0].message.content;
+      const botResponse = data.content;
 
       setMessages(prev => [...prev, { role: 'assistant', content: botResponse }]);
     } catch (error) {
@@ -113,7 +97,7 @@ export default function Chatbot() {
   const handleFAQClick = (faq: { text: string; action: string }) => {
     setMessages(prev => [...prev, { role: 'user', content: faq.text }]);
     if (faq.action.startsWith('/')) {
-      navigate(faq.action);
+      router.push(faq.action);
       setMessages(prev => [...prev, { role: 'assistant', content: `I've redirected you to the ${faq.text.split(' ')[faq.text.split(' ').length -1 ]} page.` }]);
       setIsOpen(false);
     } else {

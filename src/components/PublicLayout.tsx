@@ -1,15 +1,15 @@
-import { Outlet } from "react-router-dom";
+import type { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Chatbot from "./Chatbot";
+import ChatbotLazy from "./ChatbotLazy";
 
-export default function PublicLayout() {
+export default function PublicLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Navbar />
-      <Outlet />
+      {children}
       <Footer />
-      <Chatbot />
+      <ChatbotLazy />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import "dotenv/config";
 import mongoose from "mongoose";
-import Product from "./models/Product.js";
-import Contact from "./models/Contact.js";
+import Product from "./src/models/Product.js";
+import Contact from "./src/models/Contact.js";
 
 const products = [
     { name: "InverterPro 1.5T Split AC", category: "ac", modelNumber: "PP-AC-1501", price: "₹34,990", image: "", specs: ["1.5 Ton", "5 Star", "Inverter", "Copper Condenser"] },
