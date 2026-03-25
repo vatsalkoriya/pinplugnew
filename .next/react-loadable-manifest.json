@@ -1,9 +1,8 @@
 {
   "components\\ChatbotLazy.tsx -> ./Chatbot": {
-    "id": 2601,
+    "id": "components\\ChatbotLazy.tsx -> ./Chatbot",
     "files": [
-      "static/chunks/186-79c51ab44ad14fc9.js",
-      "static/chunks/601.dfe1b15e6c2198c9.js"
+      "static/chunks/_app-pages-browser_src_components_Chatbot_tsx.js"
     ]
   }
 }

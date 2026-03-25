@@ -4,6 +4,11 @@ import Providers from "./providers";
 export const metadata = {
   title: "Pinplug",
   description: "Precision electronics and professional integration for the modern home.",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
