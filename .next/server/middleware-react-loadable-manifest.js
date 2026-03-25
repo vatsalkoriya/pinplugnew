@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{\"components\\\\ChatbotLazy.tsx -> ./Chatbot\":{\"id\":\"components\\\\ChatbotLazy.tsx -> ./Chatbot\",\"files\":[\"static/chunks/_app-pages-browser_src_components_Chatbot_tsx.js\"]}}"
+self.__REACT_LOADABLE_MANIFEST='{"components\\\\ChatbotLazy.tsx -> ./Chatbot":{"id":2601,"files":["static/chunks/186-79c51ab44ad14fc9.js","static/chunks/601.dfe1b15e6c2198c9.js"]}}';

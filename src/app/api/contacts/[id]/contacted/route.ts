@@ -10,7 +10,7 @@ type RouteParams = {
 
 export async function PATCH(_request: Request, { params }: RouteParams) {
   await connectToDatabase();
-  const contact = await Contact.findByIdAndUpdate(
+  const contact = await (Contact as any).findByIdAndUpdate(
     params.id,
     { status: "contacted" },
     { new: true }

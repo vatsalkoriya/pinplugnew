@@ -1,11 +1,18 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/api/products/route": "app/api/products/route.js",
   "/admin/page": "app/admin/page.js",
+  "/api/contacts/route": "app/api/contacts/route.js",
+  "/api/products/[id]/route": "app/api/products/[id]/route.js",
+  "/api/products/route": "app/api/products/route.js",
+  "/api/health/route": "app/api/health/route.js",
+  "/api/chat/route": "app/api/chat/route.js",
+  "/api/contacts/[id]/contacted/route": "app/api/contacts/[id]/contacted/route.js",
+  "/api/upload/route": "app/api/upload/route.js",
+  "/(public)/about/page": "app/(public)/about/page.js",
   "/(public)/contact/page": "app/(public)/contact/page.js",
   "/(public)/page": "app/(public)/page.js",
-  "/(public)/products/page": "app/(public)/products/page.js",
+  "/(public)/product/[id]/page": "app/(public)/product/[id]/page.js",
   "/(public)/reviews/page": "app/(public)/reviews/page.js",
-  "/(public)/services/page": "app/(public)/services/page.js",
-  "/(public)/about/page": "app/(public)/about/page.js"
+  "/(public)/products/page": "app/(public)/products/page.js",
+  "/(public)/services/page": "app/(public)/services/page.js"
 }
