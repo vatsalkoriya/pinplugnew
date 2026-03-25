@@ -1697,9 +1697,6 @@ body{
 .bg-foreground{
   background-color: hsl(var(--foreground));
 }
-.bg-foreground\/70{
-  background-color: hsl(var(--foreground) / 0.7);
-}
 .bg-muted{
   background-color: hsl(var(--muted));
 }
@@ -1754,6 +1751,9 @@ body{
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+.bg-foreground\/70{
+  background-color: hsl(var(--foreground) / 0.7);
 }
 .bg-\[radial-gradient\(45\%_45\%_at_20\%_80\%\2c rgba\(255\2c 255\2c 255\2c 0\.08\)\2c transparent_60\%\)\]{
   background-image: radial-gradient(45% 45% at 20% 80%,rgba(255,255,255,0.08),transparent 60%);
@@ -2133,6 +2133,9 @@ body{
 .tracking-\[-0\.06em\]{
   letter-spacing: -0.06em;
 }
+.tracking-\[0\.2em\]{
+  letter-spacing: 0.2em;
+}
 .tracking-\[0\.35em\]{
   letter-spacing: 0.35em;
 }
@@ -2156,9 +2159,6 @@ body{
 }
 .tracking-widest{
   letter-spacing: 0.1em;
-}
-.tracking-\[0\.2em\]{
-  letter-spacing: 0.2em;
 }
 .text-accent-foreground{
   color: hsl(var(--accent-foreground));

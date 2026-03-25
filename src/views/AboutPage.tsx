@@ -19,7 +19,7 @@ export default function AboutPage() {
       {/* Hero Banner */}
       <section className="relative overflow-hidden border-b border-border">
         <div className="absolute inset-0">
-          <img src="/images/store-interior.jpg" alt="Pinplug electronics showroom" className="w-full h-full object-cover" />
+          <img src="/images/hero-storefront.jpg" alt="Pinplug Private Limited storefront at night" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
         <div className="container max-w-6xl mx-auto px-4 py-24 md:py-32 relative text-center">
@@ -96,58 +96,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Founder Section */}
-      <section className="border-b border-border bg-surface">
-        <div className="container max-w-6xl mx-auto px-4 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="order-2 lg:order-1 flex justify-center"
-            >
-              <div className="relative">
-                <img
-                  src="/images/founder-portrait.jpg"
-                  alt="Founder of Pinplug"
-                  className="w-72 md:w-80 rounded-lg outline-subtle object-cover aspect-[3/4]"
-                />
-                {/* Decorative frame */}
-                <div className="absolute -top-3 -right-3 w-full h-full rounded-lg border-2 border-primary/20 -z-10" />
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="order-1 lg:order-2"
-            >
-              <span className="text-meta text-primary">Leadership</span>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">
-                Meet the Founder
-              </h2>
-              <div className="mt-5 space-y-4 text-[15px] text-muted-foreground leading-relaxed">
-                <p>
-                  With over a decade of experience in the electronics industry, our founder 
-                  envisioned Pinplug as more than just a retail business — it's a bridge between 
-                  cutting-edge technology and the everyday consumer.
-                </p>
-                <p>
-                  "I believe every home deserves access to reliable, high-performance electronics 
-                  backed by genuine expertise. At Pinplug, we don't just sell products — we build 
-                  lasting relationships with our customers through trust and exceptional service."
-                </p>
-              </div>
-              <div className="mt-6 p-4 rounded-lg bg-card shadow-card outline-subtle">
-                <p className="text-sm font-medium text-foreground">Founder & CEO</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Pinplug Private Limited</p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Mission / Vision / Values */}
       <section className="border-b border-border">

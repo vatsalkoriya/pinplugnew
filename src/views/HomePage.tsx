@@ -159,14 +159,14 @@ export default function HomePage() {
             >
               <div className="relative aspect-[3/4] rounded-[2.5rem] border border-white/15 overflow-hidden">
                 <img
-                  src="/images/store-interior.jpg"
-                  alt="Pinplug electronics showroom"
+                  src="/images/hero-storefront.jpg"
+                  alt="Pinplug Private Limited storefront at night with bright neon signs and electronics displays"
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 <div className="absolute left-6 bottom-6 right-6">
-                  <p className="text-xs uppercase tracking-[0.4em] text-white/70">Showroom</p>
-                  <p className="mt-2 text-2xl font-black text-white">Electronics that perform</p>
+                  <p className="text-xs uppercase tracking-[0.4em] text-white/70">Our Showroom</p>
+                  <p className="mt-2 text-2xl font-black text-white">Genuine Quality, Unbeatable Rates</p>
                   <div className="mt-3 inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-orange-500">
                     Visit us <ArrowRight className="w-4 h-4" />
                   </div>
@@ -440,8 +440,8 @@ export default function HomePage() {
             
             <div className="rounded-2xl overflow-hidden border border-border shadow-2xl skew-y-1 lg:skew-y-0 lg:-rotate-2 hover:rotate-0 transition-transform duration-500">
               <img 
-                src="/images/store-interior.jpg" 
-                alt="Inside Pinplug Private Limited Electronics store in Jaipur" 
+                src="/images/hero-storefront.jpg" 
+                alt="Pinplug Private Limited Storefront in Jaipur at night" 
                 className="w-full h-full object-cover grayscale-0 hover:grayscale-0 transition-all duration-700 aspect-[4/3]"
               />
             </div>
