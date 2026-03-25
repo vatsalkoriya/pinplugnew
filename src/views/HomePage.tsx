@@ -89,7 +89,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="inline-flex items-center gap-3 rounded-full border border-white/15 px-4 py-2 text-[11px] uppercase tracking-[0.35em] font-black text-white/80"
               >
-                Pinplug Private Limited
+                Pinplug Private Limited | Jaipur
               </motion.div>
 
               <motion.h1
@@ -102,7 +102,7 @@ export default function HomePage() {
                   animate="show"
                   transition={{ duration: 0.7, delay: 0.2 }}
                 >
-                  Own the
+                  The Best
                 </motion.span>
                 <motion.span
                   className="block overflow-hidden text-orange-500"
@@ -111,7 +111,7 @@ export default function HomePage() {
                   animate="show"
                   transition={{ duration: 0.7, delay: 0.35 }}
                 >
-                  Current
+                  Electronics
                 </motion.span>
               </motion.h1>
 
@@ -121,7 +121,7 @@ export default function HomePage() {
                 transition={{ duration: 0.5, delay: 0.55 }}
                 className="mt-6 text-base md:text-xl text-white/80 max-w-xl mx-auto lg:mx-0"
               >
-                Precision appliances and smart integrations that push performance. Clean lines, bold power, zero compromise.
+                Pinplug Private Limited is Jaipur's leading electronics company. We offer genuine quality appliances, professional integration, and smart home solutions for the modern lifestyle.
               </motion.p>
 
               <motion.div
@@ -324,7 +324,7 @@ export default function HomePage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-surface">
+      <section className="bg-background">
         <div className="container max-w-6xl mx-auto px-4 py-16">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -369,6 +369,83 @@ export default function HomePage() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Visit Us Section (SEO Boost) */}
+      <section className="bg-surface border-t border-border">
+        <div className="container max-w-6xl mx-auto px-4 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <span className="text-meta text-primary uppercase tracking-widest text-xs font-bold">Visit Our Store</span>
+              <h2 className="mt-4 text-3xl md:text-4xl font-black uppercase tracking-tighter text-foreground">
+                Pinplug Private Limited <br />
+                <span className="text-orange-500">Jaipur, Rajasthan</span>
+              </h2>
+              <p className="mt-6 text-muted-foreground leading-relaxed max-w-lg">
+                We are passionate about connecting people with the latest technology. Our electronics business offers a wide range of products and services designed to make your life easier, more convenient, and more enjoyable. Visit us at our showroom for the best rates and deals.
+              </p>
+              
+              <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-5 h-5 mt-1 shrink-0 text-orange-500"><Cpu className="w-full h-full" /></div>
+                    <div>
+                      <h3 className="font-bold uppercase tracking-wider text-xs">Address</h3>
+                      <p className="mt-1 text-muted-foreground">
+                        Ganga Marg, Cbi Phatak,<br />
+                        Jagatpura, Jaipur,<br />
+                        Rajasthan 302017
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-5 h-5 mt-1 shrink-0 text-orange-500"><Phone className="w-full h-full" /></div>
+                    <div>
+                      <h3 className="font-bold uppercase tracking-wider text-xs">Phone</h3>
+                      <p className="mt-1 text-muted-foreground">092568 41555</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-5 h-5 mt-1 shrink-0 text-orange-500"><Wrench className="w-full h-full" /></div>
+                    <div>
+                      <h3 className="font-bold uppercase tracking-wider text-xs">Business Hours</h3>
+                      <p className="mt-1 text-muted-foreground">
+                        Open Daily<br />
+                        10:00 AM - 10:00 PM
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 text-orange-500">
+                    <div className="flex items-center gap-1 font-black uppercase tracking-widest text-[10px]">
+                      5.0 <div className="flex text-orange-500">★★★★★</div> 36 Reviews
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-10">
+                <Link 
+                  href="https://www.google.com/maps/dir//PINPLUG+PRIVATE+LIMITED" 
+                  target="_blank"
+                  className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-orange-500 hover:text-black transition-all"
+                >
+                  Get Directions <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+            
+            <div className="rounded-2xl overflow-hidden border border-border shadow-2xl skew-y-1 lg:skew-y-0 lg:-rotate-2 hover:rotate-0 transition-transform duration-500">
+              <img 
+                src="/images/store-interior.jpg" 
+                alt="Inside Pinplug Private Limited Electronics store in Jaipur" 
+                className="w-full h-full object-cover grayscale-0 hover:grayscale-0 transition-all duration-700 aspect-[4/3]"
+              />
+            </div>
+          </div>
         </div>
       </section>
     </div>
