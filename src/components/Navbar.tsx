@@ -106,14 +106,7 @@ export default function Navbar() {
         </nav>
 
         {/* Right Nav Options */}
-        <div className="hidden md:flex items-center justify-end gap-4 shrink-0">
-          <Link
-            href="/admin"
-            prefetch
-            className="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-full bg-foreground text-background hover:bg-neutral-800 transition-colors"
-          >
-          </Link>
-        </div>
+        
 
         {/* Mobile Nav Toggle */}
         <motion.button
@@ -169,13 +162,7 @@ export default function Navbar() {
                 transition={{ delay: navLinks.length * 0.05 }}
                 className="mt-4 pt-6 border-t border-border"
               >
-                <Link
-                  href="/admin"
-                  prefetch
-                  onClick={() => setMobileOpen(false)}
-                  className="inline-flex px-6 py-3 text-sm font-bold uppercase tracking-wider rounded-full bg-foreground text-background"
-                >
-                </Link>
+                
               </motion.div>
             </div>
           </motion.div>
