@@ -112,7 +112,6 @@ export default function Navbar() {
             prefetch
             className="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-full bg-foreground text-background hover:bg-neutral-800 transition-colors"
           >
-            Admin
           </Link>
         </div>
 
@@ -176,7 +175,6 @@ export default function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="inline-flex px-6 py-3 text-sm font-bold uppercase tracking-wider rounded-full bg-foreground text-background"
                 >
-                  Admin Portal
                 </Link>
               </motion.div>
             </div>
