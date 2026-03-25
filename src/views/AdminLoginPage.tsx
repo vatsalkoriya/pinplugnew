@@ -63,9 +63,6 @@ export default function AdminLoginPage() {
             Sign In
           </button>
         </form>
-        <p className="mt-4 text-[10px] text-center text-muted-foreground font-mono-tech">
-          Demo: admin@pinplug.com / admin123
-        </p>
       </motion.div>
     </div>
   );
