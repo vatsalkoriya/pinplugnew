@@ -16,6 +16,8 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   await connectToDatabase();
   const payload = await request.json();
+  console.log("POST /api/products - Payload received:", payload);
   const product = await Product.create(payload);
+  console.log("POST /api/products - Created product:", product);
   return NextResponse.json(product, { status: 201 });
 }

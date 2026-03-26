@@ -6,6 +6,7 @@ import {
   useState,
   useCallback,
   useEffect,
+  useRef,
   type ReactNode,
 } from "react";
 import { productsApi, contactsApi, type Product, type Contact } from "@/lib/api";
@@ -23,6 +24,7 @@ interface AdminContextType {
   addProduct: (product: Omit<Product, "_id">) => Promise<void>;
   updateProduct: (id: string, product: Partial<Omit<Product, "_id">>) => Promise<void>;
   deleteProduct: (id: string) => Promise<void>;
+  refreshProducts: () => Promise<void>;
 
   // Contacts
   contacts: Contact[];
@@ -34,6 +36,9 @@ interface AdminContextType {
 
 const AdminContext = createContext<AdminContextType | null>(null);
 
+// Cache duration: don't re-fetch products if fetched within this window
+const CACHE_DURATION_MS = 2 * 60 * 1000; // 2 minutes
+
 // ─── Provider ───────────────────────────────────────────────────────────────
 
 export function AdminProvider({ children }: { children: ReactNode }) {
@@ -44,22 +49,44 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [contactsLoading, setContactsLoading] = useState(false);
 
+  // Track when products were last fetched to avoid redundant calls
+  const lastFetchedAt = useRef<number>(0);
+  const isFetching = useRef(false);
+
   // ── Fetch data ─────────────────────────────────────────
 
-  // Public products for everyone
   useEffect(() => {
     if (typeof window === "undefined") return;
     setIsAuthenticated(localStorage.getItem("pinplug_admin_auth") === "true");
   }, []);
 
-  useEffect(() => {
+  const fetchProducts = useCallback(async (force = false) => {
+    // Skip if we already have fresh data (unless forced)
+    const now = Date.now();
+    if (!force && lastFetchedAt.current > 0 && now - lastFetchedAt.current < CACHE_DURATION_MS) {
+      return;
+    }
+    // Skip if already fetching
+    if (isFetching.current) return;
+
+    isFetching.current = true;
     setProductsLoading(true);
-    productsApi
-      .getAll()
-      .then(setProducts)
-      .catch(console.error)
-      .finally(() => setProductsLoading(false));
+    try {
+      const data = await productsApi.getAll();
+      setProducts(data);
+      lastFetchedAt.current = Date.now();
+    } catch (err) {
+      console.error("Failed to fetch products:", err);
+    } finally {
+      setProductsLoading(false);
+      isFetching.current = false;
+    }
   }, []);
+
+  // Initial fetch
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   // Admin-only contacts
   useEffect(() => {
@@ -76,7 +103,6 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   // ── Auth ──────────────────────────────────────────────────────────────────
 
   const login = useCallback(async (email: string, password: string) => {
-    // Admin credentials — stored in .env on the server in production
     const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL ?? "admin@pinplug.com";
     const ADMIN_PASS = process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? "admin123";
 
@@ -93,6 +119,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem("pinplug_admin_auth");
     setProducts([]);
     setContacts([]);
+    lastFetchedAt.current = 0;
   }, []);
 
   // ── Product actions ───────────────────────────────────────────────────────
@@ -111,6 +138,10 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     const updated = await productsApi.update(id, product);
     setProducts((prev) => prev.map((p) => (p._id === id ? updated : p)));
   }, []);
+
+  const refreshProducts = useCallback(async () => {
+    await fetchProducts(true);
+  }, [fetchProducts]);
 
   // ── Contact actions ───────────────────────────────────────────────────────
 
@@ -132,6 +163,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
         addProduct,
         updateProduct,
         deleteProduct,
+        refreshProducts,
         contacts,
         contactsLoading,
         markContacted,

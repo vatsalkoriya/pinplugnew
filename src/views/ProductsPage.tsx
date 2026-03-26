@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { categories } from "@/data/mockData";
@@ -14,14 +14,15 @@ export default function ProductsPage() {
   const activeCat = searchParams.get("cat") || "all";
 
   const [search, setSearch] = useState("");
+  const [filtered, setFiltered] = useState(products);
 
-  const filtered = useMemo(() => {
+  useEffect(() => {
     let list = activeCat === "all" ? products : products.filter(p => p.category === activeCat);
     if (search) {
       const q = search.toLowerCase();
       list = list.filter(p => p.name.toLowerCase().includes(q) || p.modelNumber.toLowerCase().includes(q));
     }
-    return list;
+    setFiltered(list);
   }, [products, activeCat, search]);
 
   const handleInquire = (product: { name: string }) => {
@@ -31,22 +32,14 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen">
       <div className="container max-w-6xl mx-auto px-4 py-10">
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
+        {/* Header — no animation delay */}
+        <div>
           <span className="text-meta">Catalog</span>
           <h1 className="mt-3 text-3xl font-semibold tracking-tighter text-foreground">Products</h1>
-        </motion.div>
+        </div>
 
         {/* Filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="mt-6 flex flex-col sm:flex-row gap-3"
-        >
+        <div className="mt-6 flex flex-col sm:flex-row gap-3">
           <input
             type="text"
             placeholder="Search products..."
@@ -68,24 +61,20 @@ export default function ProductsPage() {
                   <motion.div
                     layoutId="cat-indicator"
                     className="absolute inset-0 bg-foreground rounded-md"
-                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 35 }}
                   />
                 )}
                 <span className="relative z-10">{cat.name}</span>
               </button>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Grid */}
         <AnimatePresence mode="wait">
-          {productsLoading ? (
-            <div className="flex items-center justify-center py-24">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full"
-              />
+          {productsLoading && products.length === 0 ? (
+            <div key="loader" className="flex items-center justify-center py-24">
+              <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
             </div>
           ) : (
             <motion.div
@@ -93,7 +82,7 @@ export default function ProductsPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.15 }}
               className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
             >
               {filtered.map((product, i) => (
@@ -103,14 +92,10 @@ export default function ProductsPage() {
           )}
         </AnimatePresence>
 
-        {filtered.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mt-12 text-center text-muted-foreground text-sm"
-          >
+        {filtered.length === 0 && !productsLoading && (
+          <div className="mt-12 text-center text-muted-foreground text-sm">
             No products found.
-          </motion.div>
+          </div>
         )}
       </div>
     </div>

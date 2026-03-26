@@ -20,6 +20,8 @@ export interface Product {
     category: string;
     modelNumber: string;
     price: string;
+    mrp?: string;
+    discount?: string;
     image: string;
     images?: string[];
     specs: string[];

@@ -181,10 +181,23 @@ export default function ProductDetailsPage() {
             </p>
 
             <div className="mb-8">
-              <span className="text-3xl font-semibold font-mono-tech text-foreground tracking-tight">
-                {product.price.startsWith("₹") ? product.price : `₹${product.price}`}
-              </span>
-              <p className="text-xs text-muted-foreground mt-1 uppercase tracking-wider font-semibold">Price Estimate</p>
+              <div className="flex items-center gap-3 mb-1">
+                {product.discount && (
+                  <span className="text-2xl font-black text-primary">
+                    {product.discount.includes("%") ? product.discount : `-${product.discount}%`}
+                  </span>
+                )}
+                <span className="text-4xl md:text-5xl font-black font-mono-tech text-foreground tracking-tight">
+                  {product.price.startsWith("₹") ? product.price : `₹${product.price}`}
+                </span>
+              </div>
+              {product.mrp && (
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-muted-foreground line-through decoration-muted-foreground/30 uppercase tracking-widest">
+                    M.R.P.: {product.mrp.startsWith("₹") ? product.mrp : `₹${product.mrp}`}
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Specifications */}

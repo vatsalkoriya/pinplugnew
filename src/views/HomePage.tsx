@@ -15,10 +15,8 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
-const heroLine = {
-  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-  show: { opacity: 1, y: 0, filter: "blur(0px)" },
-};
+ 
+
 
 
 
@@ -59,111 +57,106 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="border-b border-border overflow-hidden relative min-h-[92vh] flex items-center justify-center bg-black text-white">
-        {/* Atmospheric background */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-black" />
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 0.25, x: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-            className="absolute left-[-10%] bottom-[-10%] h-72 w-[70%] border border-white/10 rounded-[40%] rotate-[-8deg]"
-          />
+      {/* Hero */}
+      <section className="relative min-h-[95vh] flex items-center bg-black text-white overflow-hidden group/hero pt-20 lg:pt-0">
+        {/* Ambient Glows */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-10%] right-[-5%] w-[60%] h-[100%] bg-orange-600/10 blur-[120px] rounded-full animate-pulse decoration-[4000ms]" />
+          <div className="absolute bottom-[20%] left-[-5%] w-[40%] h-[60%] bg-white/5 blur-[100px] rounded-full" />
         </div>
 
-        <div className="container mx-auto px-4 relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
-            <div className="text-center lg:text-left">
+        <div className="w-full relative z-10 px-6 md:px-12 lg:px-20 max-w-[1600px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Content */}
+            <div className="relative z-20 text-center lg:text-left order-2 lg:order-1">
               <motion.div
-                initial={{ opacity: 0, y: -12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="inline-flex items-center gap-3 rounded-full border border-white/15 px-4 py-2 text-[11px] uppercase tracking-[0.35em] font-black text-white/80"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3 }}
+                className="inline-flex items-center gap-2 mb-4 lg:mb-6"
               >
-                Pinplug Private Limited | Jaipur
+                <div className="h-[1.5px] w-8 lg:w-10 bg-orange-500" />
+                <span className="text-xs lg:text-base font-black tracking-[0.3em] uppercase text-orange-500">The Best Electronics</span>
               </motion.div>
 
               <motion.h1
-                className="mt-6 text-6xl sm:text-7xl md:text-8xl lg:text-[8.5rem] font-black tracking-[-0.06em] leading-[0.85] uppercase"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="text-4xl md:text-6xl lg:text-[5.5rem] font-black leading-[0.95] tracking-tight uppercase"
               >
-                <motion.span
-                  className="block overflow-hidden"
-                  variants={heroLine}
-                  initial="hidden"
-                  animate="show"
-                  transition={{ duration: 0.7, delay: 0.2 }}
-                >
-                  The Best
-                </motion.span>
-                <motion.span
-                  className="block overflow-hidden text-orange-500"
-                  variants={heroLine}
-                  initial="hidden"
-                  animate="show"
-                  transition={{ duration: 0.7, delay: 0.35 }}
-                >
-                  Electronics
-                </motion.span>
+                All Best <br />
+                <span className="text-white/60">Brands Under</span> <br />
+                One Roof
               </motion.h1>
 
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.55 }}
-                className="mt-6 text-base md:text-xl text-white/80 max-w-xl mx-auto lg:mx-0"
-              >
-                Pinplug Private Limited is Jaipur's leading electronics company. We offer genuine quality appliances, professional integration, and smart home solutions for the modern lifestyle.
-              </motion.p>
-
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-                className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center"
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="mt-4 lg:mt-7 flex flex-col gap-4 lg:gap-6"
               >
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
-                <Link
-                    href="/products"
-                    prefetch
-                    className="inline-flex items-center justify-center rounded-full bg-white text-black px-10 py-4 text-sm md:text-base font-black uppercase tracking-widest transition-all hover:bg-orange-500 hover:text-black"
-                  >
-                    Shop Now
-                  </Link>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
-                <Link
-                    href="/services"
-                    prefetch
-                    className="inline-flex items-center justify-center rounded-full bg-transparent text-white border border-white/60 px-10 py-4 text-sm md:text-base font-black uppercase tracking-widest transition-all hover:border-orange-500 hover:text-orange-500"
-                  >
-                    Book Installation
-                  </Link>
-                </motion.div>
+                <div className="space-y-1">
+                  <p className="text-lg md:text-3xl text-white font-black uppercase tracking-tight">
+                    Get <span className="text-orange-500">40% Off</span> on your
+                  </p>
+                  <p className="text-sm md:text-2xl text-white/70 font-bold uppercase tracking-[0.1em]">
+                    First Purchase
+                  </p>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Link
+                      href="/products"
+                      className="inline-flex items-center justify-center rounded-full bg-white text-black px-12 lg:px-14 py-4 lg:py-5 text-sm lg:text-base font-black uppercase tracking-widest transition-all hover:bg-orange-500 hover:text-white min-w-[200px] lg:min-w-[220px] shadow-[0_10px_30px_rgba(255,255,255,0.05)] hover:shadow-orange-500/20"
+                    >
+                      Shop Now
+                    </Link>
+                  </motion.div>
+
+                  {/* Verified Quality badge — inline on desktop */}
+                  <div className="hidden lg:flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 px-5 py-3 rounded-full group/reward cursor-default hover:bg-white/10 transition-all">
+                    <div className="w-6 h-6 bg-orange-500 rounded-lg flex items-center justify-center -rotate-12 group-hover/reward:rotate-0 transition-transform">
+                      <Shield className="w-4 h-4 text-black" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[9px] font-black uppercase tracking-[0.2em] text-orange-500">Verified Quality</span>
+                      <span className="text-[11px] font-bold text-white/90">Authorised Retailer</span>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             </div>
 
+            {/* Right Image */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="hidden lg:block"
+              initial={{ opacity: 0, scale: 0.97, x: 20 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="relative aspect-[4/3] lg:aspect-auto h-[40vh] md:h-[50vh] lg:h-[80vh] flex items-center justify-center lg:justify-end order-1 lg:order-2"
             >
-              <div className="relative aspect-[3/4] rounded-[2.5rem] border border-white/15 overflow-hidden">
+              <div className="relative w-full h-full lg:w-[130%] lg:-mr-[20%] group-hover/hero:scale-[1.02] transition-transform duration-1000 ease-out">
                 <img
-                  src="/images/hero-storefront.jpg"
-                  alt="Pinplug Private Limited storefront at night with bright neon signs and electronics displays"
-                  className="h-full w-full object-cover"
+                  src="/home_appliances_collection.png"
+                  alt="Premium Home Appliances Collection - TV, Refrigerator, Washing Machine"
+                  className="w-full h-full object-contain object-center lg:object-right drop-shadow-[0_20px_50px_rgba(255,165,0,0.15)]"
                 />
-                <div className="absolute inset-0 bg-black/40" />
-                <div className="absolute left-6 bottom-6 right-6">
-                  <p className="text-xs uppercase tracking-[0.4em] text-white/70">Our Showroom</p>
-                  <p className="mt-2 text-2xl font-black text-white">Genuine Quality, Unbeatable Rates</p>
-                  <div className="mt-3 inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-orange-500">
-                    Visit us <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
               </div>
             </motion.div>
+          </div>
+        </div>
+
+        {/* Verified Quality badge — small screens only (mobile), shown bottom-right */}
+        <div className="absolute bottom-6 right-6 z-30 lg:hidden sm:block hidden">
+          <div className="flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 px-4 py-2.5 rounded-full hover:bg-white/10 transition-all cursor-pointer group/reward">
+             <div className="w-5 h-5 bg-orange-500 rounded-lg flex items-center justify-center -rotate-12 group-hover/reward:rotate-0 transition-transform">
+                <Shield className="w-3 h-3 text-black" />
+             </div>
+             <div className="flex flex-col">
+                <span className="text-[8px] font-black uppercase tracking-[0.2em] text-orange-500">Verified Quality</span>
+                <span className="text-[10px] font-bold text-white/90">Authorised Retailer</span>
+             </div>
           </div>
         </div>
       </section>

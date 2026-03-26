@@ -24,9 +24,9 @@ export default function AboutPage() {
         </div>
         <div className="container max-w-6xl mx-auto px-4 py-24 md:py-32 relative text-center">
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.2 }}
           >
             <span className="text-xs font-mono-tech uppercase tracking-widest text-primary-foreground/60">About Us</span>
             <h1 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-primary-foreground leading-[1.05]">

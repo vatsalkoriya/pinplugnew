@@ -27,12 +27,19 @@ export default function ProductCard({ product, onInquire, index = 0 }: ProductCa
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
+      transition={{ duration: 0.2, delay: Math.min(index * 0.03, 0.2), ease: "easeOut" }}
       whileHover={{ y: -4 }}
       className="group relative bg-card p-4 rounded-lg shadow-card hover:shadow-elevated transition-all duration-300 outline-subtle flex flex-col h-full"
     >
+      {/* Discount Badge */}
+      {product.discount && (
+        <div className="absolute top-6 left-6 z-20 bg-primary text-primary-foreground text-[10px] font-black px-2 py-1 rounded shadow-lg">
+          {product.discount.includes("%") ? product.discount : `-${product.discount}%`}
+        </div>
+      )}
+
       {/* Image area */}
       <div className="aspect-[4/3] bg-surface rounded-md overflow-hidden mb-4 flex items-center justify-center relative group/img">
         {images.length > 0 ? (
@@ -98,19 +105,32 @@ export default function ProductCard({ product, onInquire, index = 0 }: ProductCa
             </span>
           ))}
         </div>
-        <div className="flex items-center justify-between pt-3">
-          <span className="text-lg font-semibold font-mono-tech text-foreground">
-            {product.price.startsWith("₹") ? product.price : `₹${product.price}`}
-          </span>
-          {onInquire && (
-            <button
-              onClick={() => onInquire(product)}
-              className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.95] transition-all"
-            >
-              Inquire
-              <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </button>
-          )}
+        
+        <div className="flex flex-col pt-3 min-h-[58px] justify-end">
+          <div className="flex items-center gap-2">
+            {product.discount && (
+              <span className="text-xs font-bold text-primary">
+                {product.discount.includes("%") ? product.discount : `-${product.discount}%`}
+              </span>
+            )}
+            <span className="text-xl font-bold font-mono-tech text-foreground leading-none">
+              {product.price.startsWith("₹") ? product.price : `₹${product.price}`}
+            </span>
+          </div>
+          <div className="flex items-center justify-between mt-1">
+            <span className="text-[10px] text-muted-foreground line-through decoration-muted-foreground/30 leading-none">
+              M.R.P.: {product.mrp && (product.mrp.startsWith("₹") ? product.mrp : `₹${product.mrp}`)}
+            </span>
+            {onInquire && (
+              <button
+                onClick={() => onInquire(product)}
+                className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.95] transition-all"
+              >
+                Inquire
+                <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </motion.div>

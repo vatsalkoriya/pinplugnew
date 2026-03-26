@@ -292,7 +292,9 @@ function ProductsTab({
             
             const category = item.category || item.Category || item.type || item.Type || "ac";
             const model = item.modelNumber || item.ModelNumber || item.model || item.Model || item.sku || item.SKU || "";
-            const price = item.price || item.Price || item.mrp || item.MRP || "";
+            const price = item.price || item.Price || item.sellingPrice || item.SellingPrice || "";
+            const mrp = item.mrp || item.MRP || item.actualPrice || "";
+            const discount = item.discount || item.Discount || item.percentage || "";
             const mainImage = item.image || item.Image || item.imageUrl || item.ImageUrl || item.img || "";
             const otherImages = item.images || item.Images || item.otherImages || "";
             const specs = item.specs || item.Specs || item.specifications || item.Specifications || item.features || "";
@@ -303,6 +305,8 @@ function ProductsTab({
               category: String(category).toLowerCase().trim().replace(" ", "-"),
               modelNumber: String(model),
               price: String(price),
+              mrp: String(mrp),
+              discount: String(discount),
               image: String(mainImage),
               images: otherImages ? String(otherImages).split(',').map((s: string) => s.trim()).filter(Boolean) : (mainImage ? [String(mainImage)] : []),
               specs: specs ? String(specs).split(',').map((s: string) => s.trim()).filter(Boolean) : [],
@@ -338,8 +342,10 @@ function ProductsTab({
         Category: "ac", 
         ModelNumber: "V123", 
         Price: "35000", 
-        Image: "https://example.com/main.jpg", 
-        Images: "https://example.com/1.jpg, https://example.com/2.jpg", 
+        MRP: "42000",
+        Discount: "17%",
+        Image: "https://images.unsplash.com/photo-1621612458022-0d67f10b7b13", 
+        Images: "https://images.unsplash.com/photo-1594172499148-98dfdb36214f", 
         Specs: "5 Star, Inverter, Copper",
         Description: "High performance AC for efficient cooling."
       }
@@ -395,6 +401,8 @@ function ProductsTab({
                   <th className="px-4 py-3 text-meta font-medium">Product</th>
                   <th className="px-4 py-3 text-meta font-medium">Category</th>
                   <th className="px-4 py-3 text-meta font-medium">Model</th>
+                  <th className="px-4 py-3 text-meta font-medium">Disc%</th>
+                  <th className="px-4 py-3 text-meta font-medium">MRP</th>
                   <th className="px-4 py-3 text-meta font-medium">Price</th>
                   <th className="px-4 py-3 text-meta font-medium w-32"></th>
                 </tr>
@@ -414,7 +422,9 @@ function ProductsTab({
                     <td className="px-4 py-3 font-sans text-foreground font-medium">{p.name}</td>
                     <td className="px-4 py-3 text-muted-foreground capitalize">{p.category.replace("-", " ")}</td>
                     <td className="px-4 py-3 text-muted-foreground">{p.modelNumber}</td>
-                    <td className="px-4 py-3 text-foreground">{p.price.startsWith("₹") ? p.price : `₹${p.price}`}</td>
+                    <td className="px-4 py-3 text-primary font-bold">{p.discount ? (p.discount.includes("%") ? p.discount : `-${p.discount}%`) : "-"}</td>
+                    <td className="px-4 py-3 text-muted-foreground line-through decoration-muted-foreground/30">{p.mrp ? (p.mrp.startsWith("₹") ? p.mrp : `₹${p.mrp}`) : "-"}</td>
+                    <td className="px-4 py-3 text-foreground font-bold">{p.price.startsWith("₹") ? p.price : `₹${p.price}`}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-1">
                         <button
@@ -648,6 +658,8 @@ function AddProductTab({
     category: product?.category || "ac",
     modelNumber: product?.modelNumber || "",
     price: product?.price || "",
+    mrp: product?.mrp || "",
+    discount: product?.discount || "",
     specs: product?.specs?.join(", ") || "",
     description: product?.description || "",
     images: product?.images?.length ? product.images : (product?.image ? [product.image] : []),
@@ -703,6 +715,8 @@ function AddProductTab({
         category: form.category,
         modelNumber: form.modelNumber,
         price: form.price,
+        mrp: form.mrp,
+        discount: form.discount,
         image: form.images[0] || "",
         images: form.images,
         specs: form.specs.split(",").map(s => s.trim()).filter(Boolean),
@@ -827,8 +841,8 @@ function AddProductTab({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="md:col-span-1">
               <label className="text-xs font-medium text-foreground mb-1 block">Product Name *</label>
               <input
                 type="text"
@@ -850,9 +864,6 @@ function AddProductTab({
                 ))}
               </select>
             </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="text-xs font-medium text-foreground mb-1 block">Model Number *</label>
               <input
@@ -863,8 +874,22 @@ function AddProductTab({
                 maxLength={50}
               />
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground mb-1 block">Price *</label>
+              <label className="text-xs font-medium text-foreground mb-1 block">MRP (Strike-through)</label>
+              <input
+                type="text"
+                value={form.mrp}
+                onChange={e => setForm(f => ({ ...f, mrp: e.target.value }))}
+                className="w-full h-10 px-3 text-sm rounded-md border border-input bg-background focus:ring-2 focus:ring-primary/20 focus:outline-none font-mono-tech"
+                placeholder="₹XX,XXX"
+                maxLength={20}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-foreground mb-1 block">Selling Price *</label>
               <input
                 type="text"
                 value={form.price}
@@ -872,6 +897,17 @@ function AddProductTab({
                 className="w-full h-10 px-3 text-sm rounded-md border border-input bg-background focus:ring-2 focus:ring-primary/20 focus:outline-none font-mono-tech"
                 placeholder="₹XX,XXX"
                 maxLength={20}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-foreground mb-1 block">Discount (%)</label>
+              <input
+                type="text"
+                value={form.discount}
+                onChange={e => setForm(f => ({ ...f, discount: e.target.value }))}
+                className="w-full h-10 px-3 text-sm rounded-md border border-input bg-background focus:ring-2 focus:ring-primary/20 focus:outline-none font-mono-tech"
+                placeholder="-70%"
+                maxLength={10}
               />
             </div>
           </div>
@@ -936,7 +972,21 @@ function AddProductTab({
                   </span>
                   <h3 className="text-xl font-black uppercase text-foreground truncate">{form.name || "Product Name"}</h3>
                   <p className="text-[10px] font-mono-tech text-muted-foreground uppercase">{form.modelNumber || "MODEL-XXXX"}</p>
-                  <p className="text-2xl font-bold font-mono-tech">{form.price ? (form.price.startsWith("₹") ? form.price : `₹${form.price}`) : "₹XX,XXX"}</p>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2">
+                       {form.discount && (
+                        <span className="text-[10px] font-bold text-primary">
+                          {form.discount.includes("%") ? form.discount : `-${form.discount}%`}
+                        </span>
+                      )}
+                      <p className="text-2xl font-bold font-mono-tech">
+                        {form.price ? (form.price.startsWith("₹") ? form.price : `₹${form.price}`) : "₹XX,XXX"}
+                      </p>
+                    </div>
+                    <p className="text-[10px] text-muted-foreground line-through decoration-muted-foreground/30">
+                      M.R.P.: {form.mrp ? (form.mrp.startsWith("₹") ? form.mrp : `₹${form.mrp}`) : "₹XX,XXX"}
+                    </p>
+                  </div>
                   <div className="flex flex-wrap gap-1">
                     {form.specs.split(',').filter(Boolean).map((s, i) => (
                       <span key={i} className="px-2 py-1 text-[8px] bg-secondary rounded text-muted-foreground whitespace-nowrap">{s.trim()}</span>
