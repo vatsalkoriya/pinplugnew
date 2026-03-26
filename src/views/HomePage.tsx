@@ -58,7 +58,7 @@ export default function HomePage() {
     <div className="min-h-screen">
       {/* Hero */}
       {/* Hero */}
-      <section className="relative min-h-[95vh] flex items-center bg-black text-white overflow-hidden group/hero pt-20 lg:pt-0">
+      <section className="relative min-h-screen flex items-center bg-black text-white overflow-hidden group/hero pt-20 pb-10 lg:pt-0 lg:pb-0 lg:min-h-[95vh]">
         {/* Ambient Glows */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-[-10%] right-[-5%] w-[60%] h-[100%] bg-orange-600/10 blur-[120px] rounded-full animate-pulse decoration-[4000ms]" />
@@ -66,9 +66,9 @@ export default function HomePage() {
         </div>
 
         <div className="w-full relative z-10 px-6 md:px-12 lg:px-20 max-w-[1600px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Left Content */}
-            <div className="relative z-20 text-center lg:text-left order-2 lg:order-1">
+            <div className="relative z-20 text-center lg:text-left order-2 lg:order-1 flex flex-col items-center lg:items-start">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -134,13 +134,13 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.97, x: 20 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-[4/3] lg:aspect-auto h-[40vh] md:h-[50vh] lg:h-[80vh] flex items-center justify-center lg:justify-end order-1 lg:order-2"
+              className="relative h-[45vw] max-h-[320px] lg:max-h-none lg:h-[80vh] flex items-center justify-center lg:justify-end order-1 lg:order-2 w-full"
             >
-              <div className="relative w-full h-full lg:w-[130%] lg:-mr-[20%] group-hover/hero:scale-[1.02] transition-transform duration-1000 ease-out">
+              <div className="relative w-full h-full lg:w-[130%] lg:-mr-[20%] flex items-center justify-center group-hover/hero:scale-[1.02] transition-transform duration-1000 ease-out">
                 <img
                   src="/home_appliances_collection.png"
                   alt="Premium Home Appliances Collection - TV, Refrigerator, Washing Machine"
-                  className="w-full h-full object-contain object-center lg:object-right drop-shadow-[0_20px_50px_rgba(255,165,0,0.15)]"
+                  className="w-full h-full object-contain object-center drop-shadow-[0_20px_50px_rgba(255,165,0,0.15)]"
                 />
               </div>
             </motion.div>
