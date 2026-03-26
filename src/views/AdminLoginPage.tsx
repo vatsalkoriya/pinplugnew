@@ -43,7 +43,7 @@ export default function AdminLoginPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               className="w-full h-10 px-3 text-sm rounded-md border border-input bg-background focus:ring-2 focus:ring-primary/20 focus:outline-none"
-              placeholder="admin@pinplug.com"
+              placeholder=""
             />
           </div>
           <div>

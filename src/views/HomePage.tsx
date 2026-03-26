@@ -63,15 +63,6 @@ export default function HomePage() {
         {/* Atmospheric background */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-black" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black" />
-          <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_70%_20%,rgba(255,122,24,0.25),transparent_60%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(45%_45%_at_20%_80%,rgba(255,255,255,0.08),transparent_60%)]" />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, rotate: -8 }}
-            animate={{ opacity: 1, scale: 1, rotate: -8 }}
-            transition={{ duration: 1.1, ease: "easeOut" }}
-            className="absolute -right-40 top-24 h-64 w-[520px] rounded-[999px] bg-gradient-to-r from-orange-500/70 via-orange-400/60 to-transparent blur-2xl"
-          />
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 0.25, x: 0 }}
@@ -163,7 +154,7 @@ export default function HomePage() {
                   alt="Pinplug Private Limited storefront at night with bright neon signs and electronics displays"
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-black/40" />
                 <div className="absolute left-6 bottom-6 right-6">
                   <p className="text-xs uppercase tracking-[0.4em] text-white/70">Our Showroom</p>
                   <p className="mt-2 text-2xl font-black text-white">Genuine Quality, Unbeatable Rates</p>
